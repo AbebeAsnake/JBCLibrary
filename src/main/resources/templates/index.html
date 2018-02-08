@@ -32,7 +32,7 @@
         </ul>
     </div>
 </nav>
-<p th:value="${saveAction}"></p>
+<p th:each="addBook : ${saveAction}"></p>
 <h1>Welcome to JBC Book Store</h1>
 <div class="person" th:unless="${#lists.isEmpty(addBook)}">
 <table class="table">
