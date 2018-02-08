@@ -2,10 +2,12 @@
 <html lang="en" xmlns:th ="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Add a book</title>
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2" aria-controls="navbar2" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,33 +37,13 @@
       th:object="${addBook}"
       method="post">
     <input type="hidden" th:field="*{id}"/>
-    <input type="hidden" name="state" value="available"/>
-    <div class="form-group">
-        <label>Book Title</label>
-        <input type="text" class="form-control" th:field="*{bookTitle}"  placeholder="Enter Tittle"/>
-    </div>
-    <div class="form-group">
-        <label >Author</label>
-        <input type="text" class="form-control" th:field="*{author}"   placeholder="author"/>
-    </div>
-    <div class="form-group">
-        <label>Year Of Publication</label>
-        <input type="text" class="form-control" th:field="*{yearOfPublication}"   placeholder="year"/>
-    </div>
-    <div class="form-group">
-        <label >ISBN</label>
-        <input type="text" class="form-control" th:field="*{ISBN}"  placeholder="isbn"/>
-    </div>
-    <div class="form-group">
-        <label >Image</label>
-        <input type="text" class="form-control" th:field="*{bookImage}"  placeholder="image(url)"/>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="hidden" name="state" value="borrowed"/>
+    <input type="hidden" th:field="*{bookTitle}"/><br/>
+    <input type="hidden" th:field="*{author}"/><br/>
+   <input type="hidden" th:field="*{yearOfPublication}"/><br/>
+    <input type="hidden" th:field="*{ISBN}"/><br/>
+    <input type="hidden" th:field="*{bookImage}"/><br/>
+    <input type="submit" value="please confirm"/>
 </form>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
