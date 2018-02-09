@@ -14,25 +14,29 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="/">
-        <img src="../images/logo.jpg" width="30" height="30" alt="Logo"/>
+        <img src="./images/logo.jpg" width="30" height="30" alt="Logo"/>
     </a>
     <a class="navbar-brand" href="/add">Add Books</a>
     <div class="collapse navbar-collapse justify-content-between" id="navbar2">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/list" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Search
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Borrowed</a>
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Avalable</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Return a book</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Borrow a book</a>
 
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-<p th:each="addBook : ${saveAction}"></p>
+<div class="notify" th:each="addBook : ${addBook}" th:switch="${addBook.state}">
+    <p class="thenotify" th:case="'borrowed'">User borrowed a book</p>
+
+</div>
+
 <h1>Welcome to JBC Book Store</h1>
 <div class="person" th:unless="${#lists.isEmpty(addBook)}">
 <table class="table">
@@ -43,7 +47,7 @@
     <th>Year Of Publication</th>
     <th>ISBN</th>
     <th>Image</th>
-    <th>state</th>
+    <th>Status</th>
 </tr>
 </thead>
 <tbody>
@@ -53,10 +57,10 @@
     <td th:inline="text">[[${addBook.author}]]</td>
     <td th:inline="text">[[${addBook.yearOfPublication}]]</td>
     <td th:inline="text">[[${addBook.ISBN}]]</td>
-    <td><img th:src="${addBook.bookImage}"/></td>
+    <td><img th:src="${addBook.bookImage}" height="70px" width="70px"/></td>
     <td th:inline="text">[[${addBook.state}]]</td>
-    <td> <a th:href="@{/borrow/{id}(id=${addBook.id})}">Borrow</a></td>
-    <td> <a th:href="@{/return/{id}(id=${addBook.id})}">Return</a></td>
+    <!--<td> <a th:href="@{/borrow/{id}(id=${addBook.id})}">Borrow</a></td>
+    <td> <a th:href="@{/return/{id}(id=${addBook.id})}">Return</a></td> -->
 
 </tr>
 </tbody>

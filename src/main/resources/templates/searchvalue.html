@@ -2,8 +2,9 @@
 <html lang="en" xmlns:th ="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Add a book</title>
+    <title>Add a book</title> <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,18 +18,21 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbar2">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
+
                 <a class="nav-link dropdown-toggle" href="/list" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Search
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Borrowed</a>
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Avalable</a>
-
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Return a book</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Borrow a book</a>
                 </div>
+
             </li>
         </ul>
     </div>
 </nav>
+<div class="person" style="margin-left: 300px; margin-right: 300px;">
+
 <table class="table">
     <thead>
     <tr>
@@ -37,7 +41,7 @@
         <th>Year Of Publication</th>
         <th>ISBN</th>
         <th>Image</th>
-        <th>state</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
@@ -47,15 +51,17 @@
         <td th:inline="text">[[${addBook.author}]]</td>
         <td th:inline="text">[[${addBook.yearOfPublication}]]</td>
         <td th:inline="text">[[${addBook.ISBN}]]</td>
-        <td><img th:src="${addBook.bookImage}"/></td>
+        <td><img th:src="${addBook.bookImage}" height="70px" width="70px"/></td>
         <td th:inline="text">[[${addBook.state}]]</td>
-        <td> <a th:href="@{/borrow/{id}(id=${addBook.id})}">Borrow</a></td>
-        <td> <a th:href="@{/return/{id}(id=${addBook.id})}">Return</a></td>
-
+        <div th:switch="${addBook.state}">
+        <td th:case="available"> <a th:href="@{/borrow/{id}(id=${addBook.id})}">Borrow a book</a></td>
+        <td th:case="borrowed"> <a th:href="@{/return/{id}(id=${addBook.id})}">Return a book</a></td>
+        <td th:case="*"> the book is on hold</td>
+        </div>
     </tr>
     </tbody>
 </table>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

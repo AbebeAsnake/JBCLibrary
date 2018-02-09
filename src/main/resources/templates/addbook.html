@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Add a book</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 
 <body>
@@ -22,8 +23,8 @@
                     Search
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Borrowed</a>
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Avalable</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Return a book </a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Borrow a book</a>
 
                 </div>
             </li>
@@ -34,30 +35,39 @@
       th:action="@{/process}"
       th:object="${addBook}"
       method="post">
+    <div class="addbooks">
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" name="state" value="available"/>
+        <h1>Add Books</h1>
     <div class="form-group">
         <label>Book Title</label>
         <input type="text" class="form-control" th:field="*{bookTitle}"  placeholder="Enter Tittle"/>
+        <span th:if="${#fields.hasErrors('bookTitle')}"
+              th:errors="*{bookTitle}"></span>
     </div>
     <div class="form-group">
         <label >Author</label>
         <input type="text" class="form-control" th:field="*{author}"   placeholder="author"/>
+        <span th:if="${#fields.hasErrors('author')}"
+              th:errors="*{author}"></span>
     </div>
     <div class="form-group">
         <label>Year Of Publication</label>
-        <input type="text" class="form-control" th:field="*{yearOfPublication}"   placeholder="year"/>
+        <input type="number" class="form-control" th:field="*{yearOfPublication}"   placeholder="2018"/>
+        <span th:if="${#fields.hasErrors('yearOfPublication')}"
+              th:errors="*{yearOfPublication}"></span>
     </div>
     <div class="form-group">
-        <label >ISBN</label>
-        <input type="text" class="form-control" th:field="*{ISBN}"  placeholder="isbn"/>
+        <label >ISBN(Optional)</label>
+        <input type="text" class="form-control" th:field="*{ISBN}"  placeholder="isbn" />
     </div>
     <div class="form-group">
-        <label >Image</label>
+        <label >Image(Optional)</label>
         <input type="text" class="form-control" th:field="*{bookImage}"  placeholder="image(url)"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -16,8 +16,7 @@ public class HomeController {
     AddBookRepository addBookRepository;
 
     @RequestMapping("/")
-    public String IndexPage(AddBook addBook,Model model){
-
+    public String IndexPage(Model model){
         model.addAttribute("addBook",addBookRepository.findAll());
         return "index";
 
@@ -31,12 +30,12 @@ public class HomeController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid AddBook addBook, BindingResult result, Model model) {
+    public String processForm(@Valid @ModelAttribute AddBook addBook, BindingResult result) {
         if (result.hasErrors()) {
             return "addbook";
         }
         addBookRepository.save(addBook);
-        model.addAttribute("saveAction", "book has been inserted/updated successfully");
+
 
         return "redirect:/";
     }
@@ -44,17 +43,13 @@ public class HomeController {
     @RequestMapping("/borrow/{id}")
     public String BorrowBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("addBook", addBookRepository.findOne(id));
-      AddBook books2 = addBookRepository.findOne(id);
-      books2.setState("borrowed");
-      model.addAttribute("borrowed",books2);
+        model.addAttribute("saveAction", "book has been borowed/returned successfully");
+
         return "borrow";
     }
     @RequestMapping("/return/{id}")
     public String ReturnBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("addBook", addBookRepository.findOne(id));
-        AddBook books2 = addBookRepository.findOne(id);
-        books2.setState("borrowed");
-        model.addAttribute("borrowed",books2);
         return "return";
     }
     @RequestMapping("/search/{state}")

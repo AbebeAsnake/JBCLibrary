@@ -24,26 +24,34 @@
                     Search
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Borrowed</a>
-                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Avalable</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=borrowed)}">Return a book</a>
+                    <a class="dropdown-item" th:href="@{/search/{state}(state=available)}">Borrow a book</a>
 
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+<div class="person" style="margin-left: 600px;">
 <form action="#"
       th:action="@{/process}"
       th:object="${addBook}"
       method="post">
+    <div class="addbooks">
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" name="state" value="available"/>
     <input type="hidden" th:field="*{bookTitle}"/><br/>
+
     <input type="hidden" th:field="*{author}"/><br/>
+
     <input type="hidden" th:field="*{yearOfPublication}"/><br/>
+
     <input type="hidden" th:field="*{ISBN}"/><br/>
     <input type="hidden" th:field="*{bookImage}"/><br/>
-    <input type="submit" value="please confirm"/>
+    <button type="submit" class="btn btn-success">please confirm</button>
+    <a href="/"  class="btn btn-danger">Cancel</a>
+    </div>
 </form>
+</div>
 </body>
 </html>
